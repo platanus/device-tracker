@@ -10,14 +10,12 @@
 
 // Active Admin's got SASS!
 @import "active_admin/mixins";
-@import "active_admin/base";
-$skinActiveColor: #001CEE;
-$skinHeaderBck: #002744;
-$panelHeaderBck: #002744;
-//$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
+@import "active_material";
 
-@import "active_skin";
-
+.custom_footer {
+  color: #777;
+  padding: 0 1.25em;
+}
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
