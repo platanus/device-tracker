@@ -37,6 +37,10 @@ group :development, :test do
   gem "rspec-nc", require: false
 end
 
+group :development do
+  gem "quiet_assets"
+end
+
 group :test do
   gem "shoulda-matchers", require: false
 end
