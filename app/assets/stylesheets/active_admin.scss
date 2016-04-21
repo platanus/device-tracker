@@ -30,13 +30,29 @@
   display: block;
   text-align: center;
   color: #fff;
-  font-size: 60px;
-  line-height: 80px;
-  opacity: 0.8;
-  background: #4477aa;
-  border: solid 3px #336699;
-  border-radius: 4px;
-  box-shadow: 2px 2px 10px #333;
-  text-shadow: 1px 1px 1px #666;
-  padding: 0 4px;
+  font-size: 16px;
+  line-height: 30px;
+  opacity: 0.85;
+  border: solid 2px white;
+  border-radius: 50px;
+  box-shadow: 2px 2px 10px #666;
+  text-shadow: 1px 1px 1px #333;
+  padding: 2px 10px;
+}
+
+.overlay.green {
+  background: #339933;
+  border-color: #267326;
+}
+
+.overlay.red {
+  background: #D14747;
+  border-color: #B82E2E;
+}
+
+.overlay.yellow {
+  background: #E0C952;
+  border-color: #AD961F;
+  color: #333;
+  text-shadow: 1px 1px 1px #EEE;
 }

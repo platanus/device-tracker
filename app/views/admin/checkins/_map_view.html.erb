@@ -30,16 +30,24 @@
       overlays.push(map.drawOverlay({
         lat: -39.2066857,
         lng: -71.572913,
-        content: '<div class="overlay">5</div>'
+        content: '<div class="big-over overlay green">53,000</div>'
       }));
     }
 
     var drawNormalOverlays = function() {
-      return true;
+      overlays.push(map.drawOverlay({
+        lat: -39.2066857,
+        lng: -71.572913,
+        content: '<div class="normal-over overlay yellow">14,000</div>'
+      }));
     }
 
     var drawSmallOverlays = function() {
-      return true;
+      overlays.push(map.drawOverlay({
+        lat: -39.2066857,
+        lng: -71.572913,
+        content: '<div class="small-over overlay red">500</div>'
+      }));
     }
 
     drawBigOverlays();
