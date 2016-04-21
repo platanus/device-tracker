@@ -5,22 +5,19 @@
   $(function() {
     var overlays = [];
 
-    // lat: -39.2066857,
-    // lng: -71.572913,
-    // zoom: 4,
     var map = new GMaps({
       el: '#map',
-      lat: -33.5066857,
-      lng: -70.572913,
-      zoom: 8,
+      lat: -39.2066857,
+      lng: -71.572913,
+      zoom: 4
     });
 
     map.addListener('zoom_changed', function() {
       clearOverlays();
       var zoom = map.map.getZoom();
       if (zoom <= 7) { drawBigOverlays() }
-      if (8 <= zoom && zoom <= 12) { drawNormalOverlays() }
-      if (zoom > 12) { drawSmallOverlays() }
+      if (8 <= zoom && zoom <= 11) { drawNormalOverlays() }
+      if (zoom > 11) { drawSmallOverlays() }
     });
 
     var clearOverlays = function() {
@@ -140,13 +137,67 @@
     }
 
     var drawSmallOverlays = function() {
-      overlays.push(map.drawOverlay({
-        lat: -39.2066857,
-        lng: -71.572913,
-        content: '<div class="overlay red">500</div>'
-      }));
+      var data = [
+        {
+          latitude: -33.466857,
+          longitude: -70.702913,
+          color: "green",
+          value: "8000"
+        },
+        {
+          latitude: -33.396857,
+          longitude: -70.652913,
+          color: "green",
+          value: "3000"
+        },
+        {
+          latitude: -33.406857,
+          longitude: -70.702913,
+          color: "yellow",
+          value: "2000"
+        },
+        {
+          latitude: -33.426857,
+          longitude: -70.742913,
+          color: "green",
+          value: "3500"
+        },
+        {
+          latitude: -33.396857,
+          longitude: -70.552913,
+          color: "green",
+          value: "3200"
+        },
+        {
+          latitude: -33.476857,
+          longitude: -70.622913,
+          color: "yellow",
+          value: "500"
+        },
+        {
+          latitude: -33.536857,
+          longitude: -70.652913,
+          color: "red",
+          value: "200"
+        },
+        {
+          latitude: -33.426857,
+          longitude: -70.602913,
+          color: "green",
+          value: "5000"
+        },
+        {
+          latitude: -33.446857,
+          longitude: -70.552913,
+          color: "green",
+          value: "1700"
+        }
+      ];
+      for (var i = 0; i < data.length; i++) {
+        drawOverlay(data[i]);
+      }
     }
 
-    drawNormalOverlays();
+    drawBigOverlays();
   });
 </script>
