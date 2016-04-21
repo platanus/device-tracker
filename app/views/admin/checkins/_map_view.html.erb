@@ -3,11 +3,45 @@
 <div id="map"></div>
 <script>
   $(function() {
+    var overlays = [];
+
     var map = new GMaps({
       el: '#map',
       lat: -39.2066857,
       lng: -71.572913,
-      zoom: 4
+      zoom: 4,
     });
+
+    map.addListener('zoom_changed', function() {
+      clearOverlays();
+      var zoom = map.map.getZoom();
+      if (zoom <= 4) { drawBigOverlays() }
+      if (5 <= zoom && zoom <= 10) { drawNormalOverlays() }
+      if (zoom > 10) { drawSmallOverlays() }
+    });
+
+    var clearOverlays = function() {
+      for (var i = 0; i < overlays.length; i++) {
+        overlays[i].setMap(null);
+      }
+    }
+
+    var drawBigOverlays = function() {
+      overlays.push(map.drawOverlay({
+        lat: -39.2066857,
+        lng: -71.572913,
+        content: '<div class="overlay">5</div>'
+      }));
+    }
+
+    var drawNormalOverlays = function() {
+      return true;
+    }
+
+    var drawSmallOverlays = function() {
+      return true;
+    }
+
+    drawBigOverlays();
   });
 </script>
