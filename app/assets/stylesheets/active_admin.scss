@@ -17,7 +17,11 @@
   padding: 0 1.25em;
 }
 
-// Overriding any non-variable SASS must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
+.columns .column {
+  float: left;
+}
+
+#map {
+  height: 600px;
+  width: 100%;
+}
