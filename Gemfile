@@ -25,6 +25,7 @@ gem "active_material"
 group :production, :staging do
   gem "rails_stdout_logging"
   gem "rack-timeout"
+  gem "pg"
 end
 
 group :development, :test do
