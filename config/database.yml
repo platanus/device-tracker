@@ -17,6 +17,7 @@ test:
 production: &deploy
   adapter: postgresql
   encoding: unicode
+  url: <%= ENV.fetch("DATABASE_URL", "") %>
   pool: <%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
-  
+
 staging: *deploy
