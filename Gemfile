@@ -20,7 +20,7 @@ gem "activeadmin_addons"
 gem "active_skin"
 gem "pundit"
 gem "rack-cors", "~> 0.4.0"
-gem "active_material", git: "git@github.com:vigetlabs/active_material.git"
+gem "active_material"
 
 group :production, :staging do
   gem "rails_stdout_logging"
