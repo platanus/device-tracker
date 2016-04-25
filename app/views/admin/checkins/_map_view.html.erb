@@ -1,203 +1,205 @@
-<script src="http://maps.google.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
 <div id="map"></div>
 <script>
-  $(function() {
-    var overlays = [];
+  function initMap() {
+    $(function() {
+      var overlays = [];
 
-    var map = new GMaps({
-      el: '#map',
-      lat: -39.2066857,
-      lng: -71.572913,
-      zoom: 4
+      var map = new GMaps({
+        el: '#map',
+        lat: -39.2066857,
+        lng: -71.572913,
+        zoom: 4
+      });
+
+      map.addListener('zoom_changed', function() {
+        clearOverlays();
+        var zoom = map.map.getZoom();
+        if (zoom <= 7) { drawBigOverlays() }
+        if (8 <= zoom && zoom <= 11) { drawNormalOverlays() }
+        if (zoom > 11) { drawSmallOverlays() }
+      });
+
+      var clearOverlays = function() {
+        for (var i = 0; i < overlays.length; i++) {
+          overlays[i].setMap(null);
+        }
+      }
+
+      var drawOverlay = function(obj) {
+        overlays.push(map.drawOverlay({
+          lat: obj.latitude,
+          lng: obj.longitude,
+          content: '<div class="overlay ' + obj.color + '">' + obj.value + '</div>'
+        }));
+      }
+
+      var drawBigOverlays = function() {
+        var data = [
+          {
+            latitude: -18.2066857,
+            longitude: -72.572913,
+            color: "green",
+            value: "7587"
+          },
+          {
+            latitude: -22.2066857,
+            longitude: -70.572913,
+            color: "green",
+            value: "9460"
+          },
+          {
+            latitude: -27.2066857,
+            longitude: -69.572913,
+            color: "green",
+            value: "12080"
+          },
+          {
+            latitude: -30.2066857,
+            longitude: -71.572913,
+            color: "green",
+            value: "10657"
+          },
+          {
+            latitude: -33.2066857,
+            longitude: -71.072913,
+            color: "green",
+            value: "53000"
+          },
+          {
+            latitude: -37.2066857,
+            longitude: -72.572913,
+            color: "green",
+            value: "12080"
+          },
+          {
+            latitude: -40.2066857,
+            longitude: -72.572913,
+            color: "green",
+            value: "12230"
+          },
+          {
+            latitude: -43.2066857,
+            longitude: -73.572913,
+            color: "green",
+            value: "7504"
+          },
+          {
+            latitude: -47.2066857,
+            longitude: -75.572913,
+            color: "green",
+            value: "3590"
+          }
+        ];
+        for (var i = 0; i < data.length; i++) {
+          drawOverlay(data[i]);
+        }
+      }
+
+      var drawNormalOverlays = function() {
+        var data = [
+          {
+            latitude: -33.466857,
+            longitude: -70.702913,
+            color: "green",
+            value: "28000"
+          },
+          {
+            latitude: -33.666857,
+            longitude: -71.572913,
+            color: "green",
+            value: "8000"
+          },{
+            latitude: -33.06066857,
+            longitude: -71.572913,
+            color: "green",
+            value: "17000"
+          },{
+            latitude: -32.2066857,
+            longitude: -71.572913,
+            color: "green",
+            value: "8000"
+          },{
+            latitude: -34.2066857,
+            longitude: -71.772913,
+            color: "yellow",
+            value: "1310"
+          },{
+            latitude: -34.2066857,
+            longitude: -70.672913,
+            color: "green",
+            value: "6000"
+          }
+        ];
+        for (var i = 0; i < data.length; i++) {
+          drawOverlay(data[i]);
+        }
+      }
+
+      var drawSmallOverlays = function() {
+        var data = [
+          {
+            latitude: -33.466857,
+            longitude: -70.702913,
+            color: "green",
+            value: "8000"
+          },
+          {
+            latitude: -33.396857,
+            longitude: -70.652913,
+            color: "green",
+            value: "3000"
+          },
+          {
+            latitude: -33.406857,
+            longitude: -70.702913,
+            color: "yellow",
+            value: "2000"
+          },
+          {
+            latitude: -33.426857,
+            longitude: -70.742913,
+            color: "green",
+            value: "3500"
+          },
+          {
+            latitude: -33.396857,
+            longitude: -70.552913,
+            color: "green",
+            value: "3200"
+          },
+          {
+            latitude: -33.476857,
+            longitude: -70.622913,
+            color: "yellow",
+            value: "500"
+          },
+          {
+            latitude: -33.536857,
+            longitude: -70.652913,
+            color: "red",
+            value: "200"
+          },
+          {
+            latitude: -33.426857,
+            longitude: -70.602913,
+            color: "green",
+            value: "5000"
+          },
+          {
+            latitude: -33.446857,
+            longitude: -70.552913,
+            color: "green",
+            value: "1700"
+          }
+        ];
+        for (var i = 0; i < data.length; i++) {
+          drawOverlay(data[i]);
+        }
+      }
+
+      drawBigOverlays();
     });
-
-    map.addListener('zoom_changed', function() {
-      clearOverlays();
-      var zoom = map.map.getZoom();
-      if (zoom <= 7) { drawBigOverlays() }
-      if (8 <= zoom && zoom <= 11) { drawNormalOverlays() }
-      if (zoom > 11) { drawSmallOverlays() }
-    });
-
-    var clearOverlays = function() {
-      for (var i = 0; i < overlays.length; i++) {
-        overlays[i].setMap(null);
-      }
-    }
-
-    var drawOverlay = function(obj) {
-      overlays.push(map.drawOverlay({
-        lat: obj.latitude,
-        lng: obj.longitude,
-        content: '<div class="overlay ' + obj.color + '">' + obj.value + '</div>'
-      }));
-    }
-
-    var drawBigOverlays = function() {
-      var data = [
-        {
-          latitude: -18.2066857,
-          longitude: -72.572913,
-          color: "green",
-          value: "7587"
-        },
-        {
-          latitude: -22.2066857,
-          longitude: -70.572913,
-          color: "green",
-          value: "9460"
-        },
-        {
-          latitude: -27.2066857,
-          longitude: -69.572913,
-          color: "green",
-          value: "12080"
-        },
-        {
-          latitude: -30.2066857,
-          longitude: -71.572913,
-          color: "green",
-          value: "10657"
-        },
-        {
-          latitude: -33.2066857,
-          longitude: -71.072913,
-          color: "green",
-          value: "53000"
-        },
-        {
-          latitude: -37.2066857,
-          longitude: -72.572913,
-          color: "green",
-          value: "12080"
-        },
-        {
-          latitude: -40.2066857,
-          longitude: -72.572913,
-          color: "green",
-          value: "12230"
-        },
-        {
-          latitude: -43.2066857,
-          longitude: -73.572913,
-          color: "green",
-          value: "7504"
-        },
-        {
-          latitude: -47.2066857,
-          longitude: -75.572913,
-          color: "green",
-          value: "3590"
-        }
-      ];
-      for (var i = 0; i < data.length; i++) {
-        drawOverlay(data[i]);
-      }
-    }
-
-    var drawNormalOverlays = function() {
-      var data = [
-        {
-          latitude: -33.466857,
-          longitude: -70.702913,
-          color: "green",
-          value: "28000"
-        },
-        {
-          latitude: -33.666857,
-          longitude: -71.572913,
-          color: "green",
-          value: "8000"
-        },{
-          latitude: -33.06066857,
-          longitude: -71.572913,
-          color: "green",
-          value: "17000"
-        },{
-          latitude: -32.2066857,
-          longitude: -71.572913,
-          color: "green",
-          value: "8000"
-        },{
-          latitude: -34.2066857,
-          longitude: -71.772913,
-          color: "yellow",
-          value: "1310"
-        },{
-          latitude: -34.2066857,
-          longitude: -70.672913,
-          color: "green",
-          value: "6000"
-        }
-      ];
-      for (var i = 0; i < data.length; i++) {
-        drawOverlay(data[i]);
-      }
-    }
-
-    var drawSmallOverlays = function() {
-      var data = [
-        {
-          latitude: -33.466857,
-          longitude: -70.702913,
-          color: "green",
-          value: "8000"
-        },
-        {
-          latitude: -33.396857,
-          longitude: -70.652913,
-          color: "green",
-          value: "3000"
-        },
-        {
-          latitude: -33.406857,
-          longitude: -70.702913,
-          color: "yellow",
-          value: "2000"
-        },
-        {
-          latitude: -33.426857,
-          longitude: -70.742913,
-          color: "green",
-          value: "3500"
-        },
-        {
-          latitude: -33.396857,
-          longitude: -70.552913,
-          color: "green",
-          value: "3200"
-        },
-        {
-          latitude: -33.476857,
-          longitude: -70.622913,
-          color: "yellow",
-          value: "500"
-        },
-        {
-          latitude: -33.536857,
-          longitude: -70.652913,
-          color: "red",
-          value: "200"
-        },
-        {
-          latitude: -33.426857,
-          longitude: -70.602913,
-          color: "green",
-          value: "5000"
-        },
-        {
-          latitude: -33.446857,
-          longitude: -70.552913,
-          color: "green",
-          value: "1700"
-        }
-      ];
-      for (var i = 0; i < data.length; i++) {
-        drawOverlay(data[i]);
-      }
-    }
-
-    drawBigOverlays();
-  });
+  }
 </script>
+<script src="https://maps.google.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.min.js"></script>
