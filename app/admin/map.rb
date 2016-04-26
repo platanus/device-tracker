@@ -3,7 +3,7 @@ ActiveAdmin.register_page "Mapa" do
     columns do
       column do
         panel "Mapa" do
-          render partial: "admin/checkins/map_view"
+          render partial: "admin/checkins/map_view", locals: { checkins: Checkin.all }
         end
       end
 
