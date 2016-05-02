@@ -1,0 +1,123 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+<table id="live-feed">
+  <thead>
+    <tr>
+      <th>
+        Usuario
+      </th>
+      <th>
+        Identificador
+      </th>
+      <th>
+        Dispositivo
+      </th>
+      <th>
+        Fecha del reporte
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Manuel Perez
+      </td>
+      <td>
+        c049bA
+      </td>
+      <td>
+        Android
+      </td>
+      <td>
+        2016-05-04 09:11:21
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Agustin Rojas
+      </td>
+      <td>
+        8502bt
+      </td>
+      <td>
+        PC
+      </td>
+      <td>
+        2016-05-04 09:09:48
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Juan Díaz
+      </td>
+      <td>
+        g1943h
+      </td>
+      <td>
+        Android
+      </td>
+      <td>
+        2016-05-04 09:07:49
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Jaime Gonzalez
+      </td>
+      <td>
+        c049bA
+      </td>
+      <td>
+        Android
+      </td>
+      <td>
+        2016-05-04 09:04:38
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  $(function() {
+    var randomize = function(collection) {
+      return collection[Math.floor(Math.random() * collection.length)];
+    }
+
+    var getUserName = function() {
+      var firstName = randomize(["Agustin", "Jaime", "Felipe", "Leandro"]);
+      var lastName = randomize(["Gonzalez", "Rojas", "Díaz", "Pérez"]);
+      return firstName + " " + lastName;
+    }
+
+    var getDeviceType = function() {
+      return randomize(["PC", "Android"]);
+    }
+
+    var getUid = function() {
+      var hex = ["a", "b", "c", "d", "e", "f", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+      var uid = "";
+      for (var i = 0; i < 6; i++) {
+        uid += randomize(hex);
+      }
+      return uid;
+    }
+
+    var getDate = function() {
+      return moment().format("YYYY-MM-DD HH:mm:ss");
+    }
+
+    var refreshFeed = function() {
+      var table = $("#live-feed tbody");
+      var rows = $(table).find("tr");
+      $(rows).last().remove();
+      $(table).prepend("<tr>" +
+      "<td>" + getUserName() + "</td>" +
+      "<td>" + getUid() + "</td>" +
+      "<td>" + getDeviceType() + "</td>" +
+      "<td>" + getDate() + "</td>" +
+      "</tr>");
+      setTimeout(refreshFeed, 5000);
+    }
+
+    setTimeout(refreshFeed, 5000);
+  });
+</script>
