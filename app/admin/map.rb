@@ -8,10 +8,12 @@ ActiveAdmin.register_page "Mapa" do
       end
 
       column do
-        panel "Filtros" do
+        panel "Estadísticas" do
+          render partial: "admin/checkins/charts"
         end
 
-        panel "Métricas" do
+        panel "Feed en vivo" do
+          render partial: "admin/checkins/feed"
         end
       end
     end
