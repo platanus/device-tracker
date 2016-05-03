@@ -57,7 +57,12 @@
   text-shadow: 1px 1px 1px #EEE;
 }
 
-#pie-chart {
+.chart-container {
+  overflow: hidden;
+}
+
+#pie-chart, #bar-chart {
+  float: left;
   height: 280px;
   width: 50%;
 }
