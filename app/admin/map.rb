@@ -3,7 +3,9 @@ ActiveAdmin.register_page "Mapa" do
     columns do
       column do
         panel "Mapa" do
-          render partial: "admin/checkins/map_view", locals: { checkins: Checkin.all }
+          render partial: "admin/checkins/map_view", locals: {
+            checkins: Checkin.all.to_a.uniq(&:device_name)
+          }
         end
       end
 
