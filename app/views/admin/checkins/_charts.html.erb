@@ -1,4 +1,7 @@
-<div id="pie-chart"></div>
+<div class="chart-container">
+  <div id="pie-chart"></div>
+  <div id="bar-chart"></div>
+</div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
   google.charts.load("current", {"packages":["corechart"]});
@@ -6,6 +9,7 @@
 
   function drawCharts() {
     drawPieChart();
+    drawBarChart();
   }
 
   function drawPieChart() {
@@ -30,5 +34,40 @@
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById("pie-chart"));
     chart.draw(data, options);
+  }
+
+  function drawBarChart() {
+
+    var data = google.visualization.arrayToDataTable([
+        ["Ciudad", "Dispositivos", { role: "style" } ],
+        ["Iquique", 4200, "#1DAA9A"],
+        ["Antofagasta", 11000, "#214576"],
+        ["La Serena", 3300, "#67BFBB"],
+        ["Valparaíso", 13500, "#1DAA9A"],
+        ["Santiago", 53000, "#67BFBB"],
+        ["Concepción", 4900, "#214576"],
+        ["Temuco", 3600, "#67BFBB"],
+        ["Puerto Montt", 7400, "#1DAA9A"],
+        ["Punta Arenas", 5100, "#214576"]
+      ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1, {
+      calc: "stringify",
+      sourceColumn: 1,
+      type: "string",
+      role: "annotation"
+    }, 2]);
+
+    var options = {
+      title: "Dispositivos activos por ciudad",
+      width: 300,
+      height: 250,
+      bar: { groupWidth: "95%" },
+      legend: { position: "none" },
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById("bar-chart"));
+    chart.draw(view, options);
   }
 </script>
