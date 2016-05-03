@@ -83,8 +83,8 @@
     }
 
     var getUserName = function() {
-      var firstName = randomize(["Agustin", "Jaime", "Felipe", "Leandro"]);
-      var lastName = randomize(["Gonzalez", "Rojas", "Díaz", "Pérez"]);
+      var firstName = randomize(["Agustin", "Jaime", "Felipe", "Leandro", "Hernán", "Gustavo", "Armando"]);
+      var lastName = randomize(["Gonzalez", "Rojas", "Díaz", "Pérez", "Alvarez", "Rodríguez", "Guzmán"]);
       return firstName + " " + lastName;
     }
 
@@ -105,16 +105,21 @@
       return moment().format("YYYY-MM-DD HH:mm:ss");
     }
 
+    var resetTable = function() {
+      $("tr.active").addClass("inactive");
+    }
+
     var refreshFeed = function() {
       var table = $("#live-feed tbody");
       var rows = $(table).find("tr");
       $(rows).last().remove();
-      $(table).prepend("<tr>" +
+      $(table).prepend("<tr class='active'>" +
       "<td>" + getUserName() + "</td>" +
       "<td>" + getUid() + "</td>" +
       "<td>" + getDeviceType() + "</td>" +
       "<td>" + getDate() + "</td>" +
       "</tr>");
+      setTimeout(resetTable, 500);
       setTimeout(refreshFeed, 5000);
     }
 

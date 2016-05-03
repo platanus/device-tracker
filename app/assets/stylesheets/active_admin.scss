@@ -66,3 +66,17 @@
   height: 280px;
   width: 50%;
 }
+
+tr {
+  background-color: white;
+}
+
+tr.active {
+  background-color: #FFFFCC;
+}
+
+tr.active.inactive {
+  background-color: white;
+  -webkit-transition: background-color 1s, -webkit-transform 1s;
+  transition: background-color 1s, transform 1s;
+}
